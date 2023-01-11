@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+  web:
+    build: .
+    image: vandavv/glm-meme-maker-web:latest
+    ports:
+      - 3000:80
+
+  yagna:
+    image: vandavv/glm-meme-maker-yagna:latest
+    build:
+      context: yagna
+      dockerfile: Dockerfile
+    environment:
+      YAGNA_API_URL: http://0.0.0.0:7465
+      YAGNA_AUTOCONF_APPKEY: 428cfed4fcde40eda39bb1bae4b21b94
+    volumes:
+      - ./yagna:/root/.local/share/yagna/
